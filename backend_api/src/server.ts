@@ -6,7 +6,9 @@ import { basicRouter } from './routes/basic.routes.ts';
 dotenv.config(); // Necessário para utilização de variávei presentes no .env
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:3000"]
+}));
 
 app.use(basicRouter);
 
