@@ -1,0 +1,22 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    /* Módulos */
+    "module": "NodeNext",                         // Define o sistema de módulos (Exigido pelo Node.js moderno)
+    "moduleResolution": "NodeNext",               // Define como os módulos são resolvidos
+    
+    /* Configurações de Saída */
+    "outDir": "./dist",                           // Diretório de saída para os arquivos compilados (JS)
+    "rootDir": "./src",                           // Diretório onde seus arquivos TS estão
+    
+    /* Regras do TypeScript */
+    "target": "ES2022",                           // Versão do ECMAScript para o código de saída
+    "esModuleInterop": true,                      // Ajuda na interoperabilidade de módulos
+    "forceConsistentCasingInFileNames": true,     // Garante que o uso de letras maiúsculas/minúsculas seja consistente
+    "strict": true,                               // Ativa todas as verificações de tipo estrito (Recomendado)
+    "skipLibCheck": true,                         // Pula a verificação de tipo para arquivos de definição de bibliotecas
+    
+    /* Opcional: Adiciona a correção para o erro TS5097 se você mantiver o .ts nos imports */
+    "allowImportingTsExtensions": true
+  }
+}

@@ -1,12 +1,15 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { basicRouter } from './routes/basic.routes.ts';
 
-dotenv.config();
+dotenv.config(); // Necessário para utilização de variávei presentes no .env
 
 const app = express();
 app.use(cors());
 
-app.listen(4000, () => {
+app.use(basicRouter);
+
+app.listen(process.env.PORT, () => {
     console.log("Servidor rodando!");
 })
