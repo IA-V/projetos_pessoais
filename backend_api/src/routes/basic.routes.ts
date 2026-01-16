@@ -1,7 +1,15 @@
 import { Router, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { auth } from '../auth/auth';
+import { auth, authorization } from '../auth/auth';
+
+declare global {
+    namespace Express {
+        interface Request {
+            user?: any;
+        }
+    }
+}
 
 dotenv.config();
 
@@ -17,6 +25,38 @@ basicRouter.get('/rota_auth', auth, (req: Request, res: Response) => { // Faz me
             message: "GET deu bom com auth kk!"
         });
     }
+})
+
+basicRouter.get('/admin', auth("admin"), (req: Request, res: Response) => {
+    if (!req.user) {
+        return res.status(401).json({
+            message: "Usuário não autenticado!"
+        })
+    }
+
+    const user = req.user
+    console.log(req.user);
+
+    return res.status(200).json({
+        message: `Olá, administrador ${user.user}!`
+    })
+
+})
+
+basicRouter.get('/common', auth("common"), (req: Request, res: Response) => {
+    if (!req.user) {
+        return res.status(401).json({
+            message: "Usuário não autenticado!"
+        })
+    }
+
+    const user = req.user
+    console.log(req.user);
+
+    return res.status(200).json({
+        message: `Olá, usuário comum ${user.user}!`
+    })
+
 })
 
 basicRouter.get('/', (req: Request, res: Response) => {
@@ -35,7 +75,7 @@ basicRouter.get('/', (req: Request, res: Response) => {
 basicRouter.post('/login', (req: Request, res: Response) => {
     
     try {
-        const { name, password } = req.body;
+        const { name, password, role } = req.body;
 
         if (!name || !password) {
             return res.status(400).json({
@@ -46,7 +86,8 @@ basicRouter.post('/login', (req: Request, res: Response) => {
         const accessToken = jwt.sign({
     
             user: name,
-            password
+            password,
+            role
     
         }, `${process.env.JWT_SECRET}`,
         {

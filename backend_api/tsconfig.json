@@ -14,9 +14,10 @@
     "esModuleInterop": true,                      // Ajuda na interoperabilidade de módulos
     "forceConsistentCasingInFileNames": true,     // Garante que o uso de letras maiúsculas/minúsculas seja consistente
     "strict": true,                               // Ativa todas as verificações de tipo estrito (Recomendado)
-    "skipLibCheck": true,                         // Pula a verificação de tipo para arquivos de definição de bibliotecas
+    "skipLibCheck": true,                         // Pula a verificação de tipo para arquivos de definição de bibliotecas,
     
     /* Opcional: Adiciona a correção para o erro TS5097 se você mantiver o .ts nos imports */
+    "noEmit": true,
     "allowImportingTsExtensions": true
   }
 }
