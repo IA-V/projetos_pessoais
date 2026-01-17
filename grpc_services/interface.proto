@@ -1,0 +1,13 @@
+syntax="proto3";
+
+service GenericService {
+    rpc getInfo(ServiceRequest) returns (ServiceResponse) {}
+}
+
+message ServiceRequest {
+    string text = 1;
+}
+
+message ServiceResponse {
+    string text = 1;
+}
