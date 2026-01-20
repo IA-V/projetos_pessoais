@@ -7,8 +7,7 @@ const packageDefinition = protoLoader.loadSync('interface.proto');
 const serviceProto = grpc.loadPackageDefinition(packageDefinition);
 
 const getInfo = (call, callback) => {
-    console.log(`${call}`);
-    callback(null, { message: `Olá do Main Service, ${call.request.message}! ` });
+    callback(null, { text: `Olá do Main Service, sua mensagem foi: "${call.request.text}" ` });
 }
 
 const main = () => {
