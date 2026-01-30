@@ -1,5 +1,5 @@
-const express = require('express');
-const dotenv = require('dotenv');
+import express from 'express';
+import dotenv from 'dotenv';
 import { baseRouter } from './routes/base.routes.ts';
 
 dotenv.config(); // Necessário para utilização de variáveis presentes no .env
