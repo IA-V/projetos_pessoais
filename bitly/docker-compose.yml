@@ -8,14 +8,21 @@ services:
     ports:
       - "5434:5432"
     volumes:
-      - bitly_db_data:/var/lib/postgresql/data
+      - bitly_db_data:/app/postgresql/data
     restart: always
   bitly:
     build: .
+    command: >
+      sh -c "npm install &&
+      if [ ! -f prisma/schema.prisma ]; then npx prisma init; fi &&
+      npx prisma generate &&
+      npm run dev"
     ports:
       - "4000:4000"
     environment:
-      DB_URL: postgres://${DB_USER}:${DB_PASSWORD}@bitly_db:5432/${DB_NAME}
+      DB_URL: ${DATABASE_URL} # postgres://${DB_USER}:${DB_PASSWORD}@bitly_db:5432/${DB_NAME}
+    volumes:
+      - .:/app
     depends_on:
       - bitly_db
     restart: always
